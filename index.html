@@ -921,8 +921,8 @@
         if (appState.userAnswers[appState.currentIndex] !== null) return;
         const q = appState.shuffledQuestions[appState.currentIndex];
         appState.userAnswers[appState.currentIndex] = index;
-        if (index === q.answer) { appState.score++; showToast('✅ Chính xác!'); }
-        else { showToast('❌ Sai rồi! Đáp án đúng là ' + String.fromCharCode(65 + q.answer)); }
+        if (index === q.answer) { appState.score++; showToast('✅ Yes Sir!'); }
+        else { showToast('❌ Thật đáng tiếc ! Đáp án là ' + String.fromCharCode(65 + q.answer)); }
         renderQuizQuestion();
     }
 
@@ -943,8 +943,8 @@
         if (!sel || sel.some(v => v === null)) { showToast('Vui lòng chọn đầy đủ Đúng/Sai!'); return; }
         appState.submittedTF.add(idx);
         const correctAll = q.tfAnswers.every((v, i) => sel[i] === v);
-        if (correctAll) { appState.score++; showToast('✅ Hoàn toàn chính xác!'); }
-        else { showToast('❌ Có ý sai!'); }
+        if (correctAll) { appState.score++; showToast('✅ Đẳng cấp đó!'); }
+        else { showToast('❌ Có ý sai rùi !'); }
         renderQuizQuestion();
     }
 
@@ -956,9 +956,9 @@
         const total = appState.totalQuestions, score = appState.score;
         const percentage = total > 0 ? Math.round((score / total) * 100) : 0;
         let circleClass = 'ok', emoji = '😢', message = 'Cố gắng hơn nhé!';
-        if (percentage >= 80) { circleClass = 'great'; emoji = '🎉'; message = 'Xuất sắc!'; }
-        else if (percentage >= 60) { circleClass = 'good'; emoji = '👍'; message = 'Khá tốt!'; }
-        else if (percentage >= 40) { circleClass = 'ok'; emoji = '💪'; message = 'Cần cố gắng thêm!'; }
+        if (percentage >= 80) { circleClass = 'great'; emoji = '😘'; message = 'Xuất sắc!'; }
+        else if (percentage >= 60) { circleClass = 'good'; emoji = '🥰'; message = 'Khá tốt!'; }
+        else if (percentage >= 40) { circleClass = 'ok'; emoji = '😉'; message = 'Cần cố gắng thêm nhe !'; }
 
         let resultHTML = `<div class="app-header"><span class="logo-icon">🏆</span><h1>Kết quả</h1></div><div class="card text-center"><div class="emoji-big">${emoji}</div><div class="result-circle ${circleClass}">${percentage}%</div><p style="font-size:1.3rem;font-weight:700;">${message}</p><p style="color:var(--text-light);">Bạn trả lời đúng <strong>${score}/${total}</strong> câu</p><div class="progress-wrap mt-3"><div class="progress-bar"><div class="progress-fill" style="width:${percentage}%;background:${percentage>=60?'#10b981':percentage>=40?'#f59e0b':'#ef4444'};"></div></div></div></div><div class="card"><p style="font-weight:600;margin-bottom:12px;">📋 Xem lại chi tiết:</p>`;
         appState.shuffledQuestions.forEach((q, i) => {
